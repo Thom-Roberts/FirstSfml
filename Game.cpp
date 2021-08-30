@@ -4,8 +4,9 @@ Game::Game()
 {
 	this->window = nullptr;
 	this->videoMode = sf::VideoMode(800, 600);
-
+	
 	this->InitWindow();
+	this->InitEnemies();
 }
 
 Game::~Game()
@@ -30,9 +31,22 @@ void Game::PollEvents()
 	}
 }
 
+void Game::InitEnemies()
+{
+	this->enemy.setPosition(sf::Vector2f(10.f, 10.f));
+	this->enemy.setSize(sf::Vector2f(100.f, 100.f));
+	this->enemy.setScale(sf::Vector2f(0.5f, 0.5f));
+	this->enemy.setFillColor(sf::Color::Cyan);
+	this->enemy.setOutlineColor(sf::Color::Green);
+	this->enemy.setOutlineThickness(1.f);
+}
+
 void Game::Update()
 {
 	this->PollEvents();
+
+	// Update mouse position
+	std::cout << "Mouse pos: " << sf::Mouse::getPosition(*this->window).x << " " << sf::Mouse::getPosition(*this->window).y << std::endl;
 }
 
 /*
@@ -40,9 +54,10 @@ void Game::Update()
 */
 void Game::Render()
 {
-	this->window->clear(sf::Color::Red);
+	this->window->clear();
 
 	// Draw game
+	this->window->draw(this->enemy);
 
 	this->window->display();
 }
@@ -59,4 +74,5 @@ void Game::InitVariables()
 void Game::InitWindow()
 {
 	this->window = new sf::RenderWindow(this->videoMode, "My first game", sf::Style::Titlebar | sf::Style::Close);
+	this->window->setFramerateLimit(144);
 }
