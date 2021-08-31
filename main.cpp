@@ -1,6 +1,9 @@
 #include "Game.h"
 
 int main() {
+	// Init srand
+	std::srand((unsigned)time(NULL));
+
 	// Init game engine
 	Game game;
 
