@@ -7,7 +7,7 @@ int main() {
 	// Init game engine
 	Game game;
 
-	while (game.Running()) {
+	while (game.Running() && !game.endGame) {
 		// Update
 		game.Update();
 		// Render
